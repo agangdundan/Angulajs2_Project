@@ -21,4 +21,20 @@ export class HomeComponent {
                     setTimeout(() => this.error = null, 4000)
                 });
     }
+
+    test_service(){
+        console.log("click");
+        let param = {"id":"me","cd":"you"}
+        this.apiService
+            .post("/login/checkLogin",param)
+            .subscribe(
+                (data) => { 
+                    this.response = data; 
+                    console.log("from api service",data);
+                },
+                (error: Error) => {
+                    this.error = error.message;
+                    setTimeout(() => this.error = null, 4000)
+                });
+    }
 }

@@ -1,9 +1,9 @@
 import { Component, Input } from "@angular/core";
-import { MenuService } from "../../service/api.menuService";
+import { MenuService } from "../../service/menu.service";
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
-    selector: "hello",
+    selector: "menu",
     templateUrl: "./client/components/shared/template/menu.html"
 })
 export class MenuComponent {

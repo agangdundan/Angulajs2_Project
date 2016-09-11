@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ApiService } from "../../service/api.service";
-import { MenuService } from "../../service/api.menuService";
+import { MenuService } from "../../service/menu.service";
 
 @NgModule({
     imports:      [ CommonModule ],

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { MenuService } from "../../../service/api.menuService";
+import { MenuService } from "../../../service/menu.service";
 
 @Component({
     selector: "contact",

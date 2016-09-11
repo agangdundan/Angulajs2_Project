@@ -5,44 +5,12 @@ import "rxjs/add/operator/map";
 
 @Component({
     selector: "app",
-    template: `
-<div class="ui container">
-    <nav class="ui menu inverted teal huge">
-        <a routerLink="home" class="item">Home</a>
-        <a routerLink="contact" class="item">Contact Me</a>
-        
-        <nav class="menu right">
-            <a (click)="myPopup.show($event, {position: 'right center'})" *ngIf="!isLogged" class="item">Login</a>
-            <a (click)="logout()" *ngIf="isLogged" class="item inverted red">Logout</a>
-        </nav>
-    </nav>
-    
-    <sm-popup class="huge" #myPopup>
-        <sm-card class="card basic">
-            <card-title> Simple login </card-title>
-            <card-subtitle>  </card-subtitle>
-            <card-content>
-                <p><b>Password</b>: angualr2express</p>
-                <p><b>Username</b>: john</p>
-            </card-content>
-            <sm-button class="bottom attached fluid primary" *ngIf="!isLogged" (click)="login()">Login</sm-button>
-            <sm-button class="bottom attached fluid red" *ngIf="isLogged" (click)="logout()">Logout</sm-button>
-        </sm-card>
-    </sm-popup>
-        
-    <hello [name]="appName"></hello>
-    
-    <div class="ui divider"></div>
-    
-    <router-outlet></router-outlet>
-    
-    <div class="center">
-        <img src='https://angular.io/resources/images/logos/standard/shield-large.png'>
-    </div>
-    
-</div>`
+    templateUrl: "./client/template/app.component.html"
 })
 export class AppComponent {
+
+    hiddenLogin: any = true;
+    loginPading: any = "225px";
     appName: string = "Angular 2 Express";
     user: any = {
         password: "angualr2express",
@@ -87,5 +55,35 @@ export class AppComponent {
     logout(): void {
         localStorage.removeItem("id_token");
         location.reload();
+    }
+
+    ngOnInit(){
+      console.log("check login");
+
+      let user: any;
+      if(localStorage.getItem('user')){
+        user = localStorage.getItem('user');
+      } else{
+        localStorage.setItem('user','');
+        user = localStorage.getItem('user');
+      }
+
+      this.http.post("/login/checkLogin", JSON.stringify({ user: user}), new RequestOptions({
+            headers: new Headers({"Content-Type": "application/json"})
+        }))
+            .map((res: Response) => res.json())
+            .subscribe(
+                (res) => {
+                    //localStorage.setItem("id_token", res.jwt);
+                    console.log("res = ", res);
+                    if(res.status){
+                        this.hiddenLogin = false;
+                        this.loginPading = "225px";
+                    }else{
+                        this.loginPading = "0px";
+                    }
+                },
+                (error: Error) => { console.log(error); }
+            );
     }
 }

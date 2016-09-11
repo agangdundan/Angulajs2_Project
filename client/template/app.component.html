@@ -1,0 +1,52 @@
+<div id="wrapper" [ngStyle]="{'padding-left': loginPading}">
+    <menu [hidden]="hiddenLogin"></menu>
+    <div class="ui divider"></div>
+    <div id="page-wrapper" style="min-height:610px">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<div style="display:none;">
+  <!-- <router-outlet disabled></router-outlet> -->
+</div>
+
+<!--
+
+<div class="ui container">
+<nav class="ui menu inverted teal huge">
+    <a routerLink="home" class="item">Home</a>
+    <a routerLink="contact" class="item">Contact Me</a>
+
+    <nav class="menu right">
+        <a (click)="myPopup.show($event, {position: 'right center'})" *ngIf="!isLogged" class="item">Login</a>
+        <a (click)="logout()" *ngIf="isLogged" class="item inverted red">Logout</a>
+    </nav>
+</nav>
+
+<sm-popup class="huge" #myPopup>
+    <sm-card class="card basic">
+        <card-title> Simple login </card-title>
+        <card-subtitle>  </card-subtitle>
+        <card-content>
+            <p><b>Password</b>: angualr2express</p>
+            <p><b>Username</b>: john</p>
+        </card-content>
+        <sm-button class="bottom attached fluid primary" *ngIf="!isLogged" (click)="login()">Login</sm-button>
+        <sm-button class="bottom attached fluid red" *ngIf="isLogged" (click)="logout()">Logout</sm-button>
+    </sm-card>
+</sm-popup>
+
+<hello [name]="appName"></hello>
+
+<div class="ui divider"></div>
+
+<router-outlet></router-outlet>
+
+<div class="center">
+    <img src='https://angular.io/resources/images/logos/standard/shield-large.png'>
+</div>
+
+</div>
+ -->
