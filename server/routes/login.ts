@@ -53,12 +53,21 @@ loginRouter.post("/", function (request: Request, response: Response, next: Next
     });
 });
 
+loginRouter.get('/login', function(request: Request, response: Response, next: NextFunction){
+    console.log("get login");
+    let token = lnPermission.clearToken(request);
+    response.json({
+        "status": true,
+        "data": token
+    });
+});
+
 loginRouter.post('/checkLogin', function(request: Request, response: Response, next: NextFunction) {
     let resStatus = false;
     let resData = {};
     // console.log("user = ", request.body);
     if(lnPermission.isLogin(request)){
-        console.log("get start page");
+        //console.log("get start page");
         resStatus = true;
         //resData = [{"jwt":"Im Logining","types":"Mamamoo"},{"jwt":"Im Logining naaa","types":"Mamamoo Sora"}];
     }else {

@@ -5,7 +5,7 @@ import "rxjs/add/operator/map";
 
 @Component({
     selector: "app",
-    templateUrl: "./client/template/app.component.html"
+    templateUrl: "./client/app.component.html"
 })
 export class AppComponent {
 
@@ -44,7 +44,7 @@ export class AppComponent {
             .map((res: Response) => res.json())
             .subscribe(
                 (res: Response & { jwt: string }) => {
-                    localStorage.setItem("id_token", res.jwt);
+                    //localStorage.setItem("id_token", res.jwt);
                     this.myPopup.hide();
                     location.reload();
                 },
@@ -81,6 +81,7 @@ export class AppComponent {
                         this.loginPading = "225px";
                     }else{
                         this.loginPading = "0px";
+                        window.location.href = "#/login";
                     }
                 },
                 (error: Error) => { console.log(error); }

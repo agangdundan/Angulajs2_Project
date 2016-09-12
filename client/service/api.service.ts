@@ -10,7 +10,7 @@ export class ApiService {
 
     get(url: string) {
         return this
-            .authHttp
+            .http
             .get(url)
             .map((response: Response) => response.json());
     }

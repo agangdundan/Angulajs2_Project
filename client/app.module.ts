@@ -7,6 +7,7 @@ import { NgSemanticModule } from "ng-semantic";
 import { AppComponent }  from './app.component';
 import { routing } from "./routes";
 import { MenuComponent } from "./components/shared/menu.component";
+import { LoginModule } from "./modules/login/login.module";
 import { ContactModule } from "./modules/contact/contact.module";
 import { HomeModule } from "./modules/home/home.module";
 import { SharedModule } from "./modules/shared/shared.module";
@@ -16,6 +17,7 @@ import { SharedModule } from "./modules/shared/shared.module";
         BrowserModule,
         HttpModule,
         NgSemanticModule,
+        LoginModule,
         ContactModule,
         HomeModule,
         routing,

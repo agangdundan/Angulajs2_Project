@@ -22,12 +22,15 @@ module.exports = new function() {
   this.writeToken = function(res, id){
     let token = {id:id};
     token = jwt.encode(token, this.secret);
-    res.cookie(this.cookieName, token);
+    console.log(token);
+    // res.cookie(this.cookieName, token);
+    return token;
   }
 
 ///////////// clear tokem method  //////////////////////////////////////////////
   this.clearToken = function(res){
-    this.writeToken(res, 0);
+    let token = this.writeToken(res, 0);
+    return token;
   }
 
 ///////////// islogin tokem method  ////////////////////////////////////////////
