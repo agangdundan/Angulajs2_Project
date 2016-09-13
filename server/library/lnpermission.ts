@@ -7,14 +7,14 @@ module.exports = new function() {
 
 ///////////// read tokem method  ///////////////////////////////////////////////
   this.readToken = function(req){
-    let token = req.body.user;
-    console.log("Before decode : ", token);
-    if(token == undefined || token == "" || token == null){
+    let token = req.cookies[this.cookieName];
+    // console.log("Before decode : ", token);
+    if(token == undefined){
       token = {id:0};
     }else {
       token = jwt.decode(token, this.secret)
     }
-    console.log("permission readToken = ", token);
+    // console.log("permission readToken = ", token);
     return token;
   }
 
@@ -22,21 +22,18 @@ module.exports = new function() {
   this.writeToken = function(res, id){
     let token = {id:id};
     token = jwt.encode(token, this.secret);
-    console.log(token);
-    // res.cookie(this.cookieName, token);
-    return token;
+    res.cookie(this.cookieName, token);
   }
 
 ///////////// clear tokem method  //////////////////////////////////////////////
   this.clearToken = function(res){
-    let token = this.writeToken(res, 0);
-    return token;
+    this.writeToken(res, 0);
   }
 
 ///////////// islogin tokem method  ////////////////////////////////////////////
   this.isLogin = function(req){
     let token = this.readToken(req);
-    console.log("token is : ", token);
+    console.log("isLogin token is : ", token);
     if(token.id != 0){
       return true;
     }else {

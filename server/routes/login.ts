@@ -53,30 +53,26 @@ loginRouter.post("/", function (request: Request, response: Response, next: Next
     });
 });
 
-loginRouter.get('/login', function(request: Request, response: Response, next: NextFunction){
-    console.log("get login");
-    let token = lnPermission.clearToken(request);
-    response.json({
-        "status": true,
-        "data": token
+loginRouter.post('/checkLogin', function(req, res, next) {
+    let resStatus = false;
+    let resData = {};
+    if(lnPermission.isLogin(req)){
+        resStatus = true;
+    }else {
+        //console.log("Go to Login");
+    }
+    res.json({
+        "status": resStatus,
+        "data": resData
     });
 });
 
-loginRouter.post('/checkLogin', function(request: Request, response: Response, next: NextFunction) {
-    let resStatus = false;
-    let resData = {};
-    // console.log("user = ", request.body);
-    if(lnPermission.isLogin(request)){
-        //console.log("get start page");
-        resStatus = true;
-        //resData = [{"jwt":"Im Logining","types":"Mamamoo"},{"jwt":"Im Logining naaa","types":"Mamamoo Sora"}];
-    }else {
-        console.log("Go to Login");
-        //lnPermission.clearToken(request);
-    }
-    response.json({
-        "status": resStatus,
-        "data": resData
+loginRouter.get('/login', function(req, res, next){
+    //console.log("get login res = ");
+    lnPermission.clearToken(res);
+    res.json({
+        "status": true,
+        "data": "set0"
     });
 });
 

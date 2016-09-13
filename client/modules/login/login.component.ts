@@ -16,8 +16,7 @@ export class LoginComponent {
             .get("/login/login")
             .subscribe(
                 (res) => { 
-                    //console.log("res login = ", res); 
-                    localStorage.setItem('user',res.data);
+                    console.log("res login = ", res); 
                 },
                 (error: Error) => {
                     this.error = error.message;

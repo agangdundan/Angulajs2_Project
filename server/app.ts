@@ -7,6 +7,8 @@ import { json, urlencoded } from "body-parser";
 import { loginRouter } from "./routes/login";
 import { protectedRouter } from "./routes/protected";
 
+let cookieParser = require('cookie-parser');
+
 const app: express.Application = express();
 app.disable("x-powered-by");
 
@@ -15,7 +17,7 @@ app.use(express.static(join(__dirname, '../public')));
 
 app.use(json());
 app.use(urlencoded({ extended: true }));
-
+app.use(cookieParser());
 // api routes
 app.use("/api", protectedRouter);
 app.use("/login", loginRouter);
