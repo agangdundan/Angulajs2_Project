@@ -22,7 +22,7 @@
                                 <img class="media-object" src="http://placehold.it/50x50" alt="">
                             </span>
                             <div class="media-body">
-                                <h5 class="media-heading"><strong>John Smith</strong>
+                                <h5 class="media-heading"><strong>{{display_name}}</strong>
                                 </h5>
                                 <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -37,7 +37,7 @@
                                 <img class="media-object" src="http://placehold.it/50x50" alt="">
                             </span>
                             <div class="media-body">
-                                <h5 class="media-heading"><strong>John Smith</strong>
+                                <h5 class="media-heading"><strong>{{display_name}}</strong>
                                 </h5>
                                 <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -52,7 +52,7 @@
                                 <img class="media-object" src="http://placehold.it/50x50" alt="">
                             </span>
                             <div class="media-body">
-                                <h5 class="media-heading"><strong>John Smith</strong>
+                                <h5 class="media-heading"><strong>{{display_name}}</strong>
                                 </h5>
                                 <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -93,7 +93,7 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{display_name}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -114,11 +114,6 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebar_controller">
         <ul class="nav navbar-nav side-nav">
-            <li>
-              <a class="menu" id="home" routerLink="home">
-                <i class="fa fa-fw fa-home"></i>Home
-              </a>
-            </li>
             <li>
               <a class="menu" id="contact" routerLink="contact">
                 <i class="fa fa-fw fa-comment"></i>Contact

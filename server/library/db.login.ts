@@ -125,7 +125,7 @@ module.exports = new function() {
     checkLoginPass()
     .then(function() {
       console.log("checkLogin from promise = ", arguments);
-      callbackok($scope.getLogin[0]._id);
+      callbackok($scope.getLogin);
     }).catch(function(e){
   	  console.log(e);
       callbackerror(e);

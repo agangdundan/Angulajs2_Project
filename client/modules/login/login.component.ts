@@ -1,6 +1,7 @@
 import { Component, Inject, NgModule } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { MenuService } from "../../service/menu.service";
 import { ApiService } from "../../service/api.service";
 
 @Component({
@@ -12,15 +13,18 @@ export class LoginComponent {
     response: {};
     password: any;
     username: any;
+    private storage: any;
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService, private menuservice: MenuService) {
+      this.storage = localStorage;
+    }
 
     ngOnInit() {
         this.apiService
             .get("/login/login")
             .subscribe(
-                (res) => { 
-                    console.log("res login = ", res); 
+                (res) => {
+                    console.log("res login = ", res);
                 },
                 (error: Error) => {
                     this.error = error.message;
@@ -40,8 +44,11 @@ export class LoginComponent {
                 (res) => {
                     console.log(" res = ", res);
                     if(res.status === true){
-                        window.location.href = "#/home";
-                        window.location.reload();
+                      console.log("login data = ", res);
+                      let loginData = JSON.stringify(res.data[0]);
+                      this.storage.setItem('logindata',loginData);
+                      window.location.href = "#/home";
+                      window.location.reload();
                     } else {
                         console.log("can't login");
                     }

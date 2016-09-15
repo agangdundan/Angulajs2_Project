@@ -14,7 +14,7 @@ export class ContactComponent {
     }
 
     ngOnInit(){
-        
+
     }
 
     thisClick(item: string = '{"employees" :[{"a":"Jesse","b":"Jessica"},{"a":"Me","b":"MeMe"}]}'){

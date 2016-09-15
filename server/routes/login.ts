@@ -82,10 +82,11 @@ loginRouter.post("/login", function(req,res,next){
     let user = req.body.user;
     let password  = req.body.password;
 
-    logins.checkLogin(user, password, function(id){
-        lnPermission.writeToken(res, id);
+    logins.checkLogin(user, password, function(login){
+        // console.log("login base data = ", login);
+        lnPermission.writeToken(res, login[0]._id);
         res.json({
-            data:{"id":id},
+            data:login,
             status:true
         });
     }, function(errorMessage){
