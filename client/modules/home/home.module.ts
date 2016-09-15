@@ -27,4 +27,4 @@ import { ContactModule } from "../contact/contact.module";
         CUSTOM_ELEMENTS_SCHEMA
     ]
 })
-export class HomeModule { }
+export class HomeModule {}

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ApiService } from "../../service/api.service";
+import { pmslnService } from "../../service/pmsln.service";
 
 @Component({
     selector: "home",
@@ -9,7 +10,14 @@ export class HomeComponent {
     error: string;
     response: {};
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService, private permission: pmslnService) {
+        this.permission.isLogin();
+        console.log("home.component");
+    }
+
+    ngOnInit(){
+        
+    }
 
     protected() {
         this.apiService

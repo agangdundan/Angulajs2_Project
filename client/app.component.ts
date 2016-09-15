@@ -30,13 +30,9 @@ export class AppComponent {
     }
 
     ngOnInit(){
-      console.log("check login");
-
+      // console.log("check login");
       let user: any = "";
-
-      this.http.post("/login/checkLogin", JSON.stringify({}), new RequestOptions({
-            headers: new Headers({"Content-Type": "application/json"})
-        }))
+      this.http.get("/login/checkLogin")
             .map((res: Response) => res.json())
             .subscribe(
                 (res) => {

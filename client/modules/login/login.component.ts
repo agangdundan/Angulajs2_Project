@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, Inject, NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { ApiService } from "../../service/api.service";
 
 @Component({
@@ -8,6 +10,8 @@ import { ApiService } from "../../service/api.service";
 export class LoginComponent {
     error: string;
     response: {};
+    password: any;
+    username: any;
 
     constructor(private apiService: ApiService) {}
 
@@ -25,6 +29,28 @@ export class LoginComponent {
     }
 
     login(){
-        console.log("click login");
+        let param = {
+            user: this.username,
+            password: this.password
+        }
+        // console.log(param);
+        this.apiService
+            .post("/login/login", param)
+            .subscribe(
+                (res) => {
+                    console.log(" res = ", res);
+                    if(res.status === true){
+                        window.location.href = "#/home";
+                        window.location.reload();
+                    } else {
+                        console.log("can't login");
+                    }
+                },
+                (error) => {
+                    this.error = error.message;
+                    console.log("error = ", this.error);
+                    setTimeout(() => this.error = null, 4000);
+                }
+            )
     }
 }

@@ -4,6 +4,7 @@ import { sign } from "jsonwebtoken";
 import { secret, length } from "../config";
 
 let lnPermission = require("../library/lnpermission");
+let logins = require("../library/db.login");
 
 const loginRouter: Router = Router();
 
@@ -53,7 +54,7 @@ loginRouter.post("/", function (request: Request, response: Response, next: Next
     });
 });
 
-loginRouter.post('/checkLogin', function(req, res, next) {
+loginRouter.get('/checkLogin', function(req, res, next) {
     let resStatus = false;
     let resData = {};
     if(lnPermission.isLogin(req)){
@@ -75,5 +76,25 @@ loginRouter.get('/login', function(req, res, next){
         "data": "set0"
     });
 });
+
+loginRouter.post("/login", function(req,res,next){
+    console.log("Post login data = ", req.body);
+    let user = req.body.user;
+    let password  = req.body.password;
+
+    logins.checkLogin(user, password, function(id){
+        lnPermission.writeToken(res, id);
+        res.json({
+            data:{"id":id},
+            status:true
+        });
+    }, function(errorMessage){
+        console.log("errorMessage = ", errorMessage);
+        res.json({
+            status:false,
+            error: errorMessage
+        });
+    });
+})
 
 export { loginRouter }

@@ -16,7 +16,6 @@ export class ApiService {
     }
 
     post(url: string, param:any) {
-        console.log("http post");
         return this
             .http
             .post(url, JSON.stringify(param), new RequestOptions({
