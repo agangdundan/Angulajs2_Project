@@ -12,7 +12,7 @@ module.exports = new function() {
     if(token == undefined){
       token = {id:0};
     }else {
-      token = jwt.decode(token, this.secret)
+      token = jwt.decode(token, this.secret);
     }
     // console.log("permission readToken = ", token);
     return token;
