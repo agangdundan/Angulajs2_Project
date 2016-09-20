@@ -5,7 +5,7 @@ import { pmslnService } from "../../../service/pmsln.service";
 
 @Component({
     selector: "contact",
-    templateUrl: `client/modules/category/category_list/category_list.html`
+    templateUrl: "client/modules/category/category_list/category_list.html"
 })
 export class CategoryListComponent {
     item = 1;
