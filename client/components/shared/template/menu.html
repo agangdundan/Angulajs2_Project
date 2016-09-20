@@ -115,13 +115,8 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebar_controller">
         <ul class="nav navbar-nav side-nav">
             <li>
-              <a class="menu" id="contact" routerLink="contact">
-                <i class="fa fa-fw fa-comment"></i>Contact
-              </a>
-            </li>
-            <li>
-                <a class="menu" id="dashboard" href="#">
-                  <i class="fa fa-fw fa-dashboard"></i> Dashboard
+                <a class="menu" id="dashboard" routerLink="category_list">
+                  <i class="fa fa-fw fa-folder-open"></i> Category
                 </a>
             </li>
             <li>
@@ -173,6 +168,11 @@
             <li *ngFor="let item of test" >
               <a class="menu" id="rtl" href="#">
                 <i class="fa fa-fw fa-dashboard"></i> {{item.b}}
+              </a>
+            </li>
+            <li>
+              <a class="menu" id="contact" routerLink="contact">
+                <i class="fa fa-fw fa-comment"></i>Contact
               </a>
             </li>
         </ul>

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Http, Headers, RequestOptions, Response } from "@angular/http";
-import { SemanticPopupComponent } from "ng-semantic";
+// import { SemanticPopupComponent } from "ng-semantic";
 import "rxjs/add/operator/map";
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent {
     };
     response: Response;
     isLogged: boolean;
-    @ViewChild("myPopup") myPopup: SemanticPopupComponent;
+    // @ViewChild("myPopup") myPopup: SemanticPopupComponent;
 
     constructor(private http: Http) {
         this.isLogged = !!localStorage.getItem("id_token");

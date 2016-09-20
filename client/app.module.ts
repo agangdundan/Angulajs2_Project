@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAuth } from "angular2-jwt";
 import { HttpModule } from "@angular/http";
-import { NgSemanticModule } from "ng-semantic";
+// import { NgSemanticModule } from "ng-semantic";
 
 import { AppComponent }  from './app.component';
 import { routing } from "./routes";
 import { MenuComponent } from "./components/shared/menu.component";
 import { LoginModule } from "./modules/login/login.module";
+import { CategoryModule } from "./modules/category/category.module";
 import { ContactModule } from "./modules/contact/contact.module";
 import { HomeModule } from "./modules/home/home.module";
 import { SharedModule } from "./modules/shared/shared.module";
@@ -18,8 +19,9 @@ import { SharedModule } from "./modules/shared/shared.module";
         BrowserModule,
         FormsModule,
         HttpModule,
-        NgSemanticModule,
+        // NgSemanticModule,
         LoginModule,
+        CategoryModule,
         ContactModule,
         HomeModule,
         routing,

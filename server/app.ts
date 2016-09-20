@@ -6,6 +6,7 @@ import { json, urlencoded } from "body-parser";
 
 import { loginRouter } from "./routes/login";
 import { protectedRouter } from "./routes/protected";
+import { categoryRouter } from "./routes/category";
 
 let cookieParser = require('cookie-parser');
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 // api routes
 app.use("/api", protectedRouter);
 app.use("/login", loginRouter);
+app.use("/category", categoryRouter);
 
 app.use('/client', express.static(join(__dirname, '../client')));
 
