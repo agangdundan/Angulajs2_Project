@@ -37,7 +37,7 @@ export class AppComponent {
             .subscribe(
                 (res) => {
                     //localStorage.setItem("id_token", res.jwt);
-                    console.log("res = ", res);
+                    // console.log("res = ", res);
                     if(res.status){
                         this.hiddenLogin = false;
                         this.loginPading = "225px";

@@ -6,6 +6,7 @@ import { HttpModule } from "@angular/http";
 import { routing } from "./category.routing";
 import { SharedModule } from "../shared/shared.module";
 import { CategoryListComponent } from "./category_list/category_list.component";
+import { CategoryManageComponent } from './category_manage/category_manage.component';
 // import { FormComponent } from "./form/form.component";
 // import { ProfileComponent } from "./profile/profile.component";
 
@@ -18,7 +19,7 @@ import { CategoryListComponent } from "./category_list/category_list.component";
         SharedModule.forRoot()
     ],
     // exports: [ ProfileComponent ],
-    declarations: [ CategoryListComponent ],
-    bootstrap:    [ CategoryListComponent ]
+    declarations: [ CategoryListComponent, CategoryManageComponent],
+    bootstrap:    [ CategoryListComponent ],
 })
 export class CategoryModule { }

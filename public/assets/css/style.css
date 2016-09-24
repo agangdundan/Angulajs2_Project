@@ -111,3 +111,8 @@ body {
   text-align: center;
   font-size: 12px;
 }
+
+.row{
+    width: 1090px;
+    padding-left: 10px;
+}
