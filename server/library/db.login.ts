@@ -60,7 +60,7 @@ module.exports = new function() {
             // deferred.reject('Unable to connect to the mongoDB server. Error:' + err);
             reject('Unable to connect to the mongoDB server. Error:' + err);
           } else {
-            console.log('Connection established to', url);
+            // console.log('Connection established to', url);
             // Get the documents collection
             let clt_member = db.collection('member');
             //Create some users
@@ -77,7 +77,7 @@ module.exports = new function() {
                 // deferred.reject('Error create Login ' + err);
                 reject('Error create Login ' + err);
               } else {
-                console.log('Inserted : ', result.insertedId);
+                // console.log('Inserted : ', result.insertedId);
                 $scope.login_id = result.insertedId;
                 // deferred.resolve(result.insertedId);
                 resolve(result.insertedId);
@@ -118,12 +118,12 @@ module.exports = new function() {
               reject(err);
             }
   					assert.equal(err, null);
-  					console.log("err = ", err);
+  					// console.log("err = ", err);
   					if (doc != null) {
   						$scope.getLogin.push(doc);
   					} else{
   						if($scope.getLogin.length > 0){
-                console.log("getLogin = ", $scope.getLogin);
+                // console.log("getLogin = ", $scope.getLogin);
   							//deferred.resolve("Login Ok");
                 resolve("Login Ok");
   						} else {
@@ -140,7 +140,7 @@ module.exports = new function() {
 
     checkLoginPass()
     .then(function() {
-      console.log("checkLogin from promise = ", arguments);
+      // console.log("Login from mongo = ", $scope.getLogin);
       callbackok($scope.getLogin);
     }).catch(function(e){
   	  console.log(e);

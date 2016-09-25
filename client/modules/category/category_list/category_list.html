@@ -10,30 +10,37 @@
   </div>
 
   <div class="row">
-    <input type="text" [(ngModel)]="query" placeholder="... filter" > 
+    <div class="col-sm-4">
+      <input class="form-control" type="text" [(ngModel)]="query" placeholder="filter" style="display: inline;width: 72%;" />
+      <button type="button" class="btn btn-default" style="display: inline;" (click)="filterCategory()">
+        <span class="fa fa-search"></span> Search
+      </button>
+    </div> 
   </div>
 
   <div class="row">
-    <table id="example" class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th class="a" id="me" (click)="clickme('me')">Category name</th>
-          <th class="a">Description</th>
-          <th class="a">Product qty</th>
-          <!--<th class="a">Cover img</th>-->
-          <th class="a">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cate of categorys">
-          <td>{{cate.cate_name}}</td>
-          <td>{{cate.cate_description}}</td>
-          <td>{{cate.product_qty}}</td>
-          <!--<td><img src="img/p83.jpg" alt="Smiley face" height="42" width="42"></td>-->
-          <td>{{cate.status}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col-sm-12">
+      <table id="example" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th class="a" id="me" (click)="clickme('me')">Category name</th>
+            <th class="a">Description</th>
+            <th class="a">Product qty</th>
+            <!--<th class="a">Cover img</th>-->
+            <th class="a">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cate of categorys">
+            <td>{{cate.cate_name}}</td>
+            <td>{{cate.cate_description}}</td>
+            <td>{{cate.product_qty}}</td>
+            <!--<td><img src="img/p83.jpg" alt="Smiley face" height="42" width="42"></td>-->
+            <td>{{cate.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!--<div class="row">

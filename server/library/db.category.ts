@@ -13,10 +13,13 @@ module.exports = new function() {
       // let deferred = promise.pending();
       return new Promise(function(resolve, reject) {
         MongoClient.connect(url, function(err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            reject('Unable to connect to the mongoDB server. Error:' + err);
+          }
   				assert.equal(null, err);
   				let cursor = db.collection('category').find();
   				cursor.each(function(err, doc) {
-            // console.log(" 19: err = ", err);
             if(err){
               // deferred.reject(err);
               reject(err);
@@ -42,10 +45,61 @@ module.exports = new function() {
 
     getAllCate()
     .then(function() {
-      console.log("getCate from promise = ", arguments);
+      // console.log("getCate from promise = ", arguments);
       callbackok($scope.getCategoryList);
     }).catch(function(e){
   	  console.log("reject is = ", e);
+      callbackerror(e);
+  	});
+  }
+
+  this.saveCategory = function(data, callbackok, callbackerror){
+    // console.log(" save data = ", data);
+    let $scope:any = {};
+
+    let insertCategory = function(){
+      return new Promise(function(resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            reject('Unable to connect to the mongoDB server. Error:' + err);
+          } else {
+            // console.log('Connection established to', url);
+            let category = db.collection('category');
+            let categoryData = {
+              cate_name: data.cate_name,
+              cate_description: data.cate_description,
+              status: data.cate_status,
+              product_qty: 0,
+              cover_img: "",
+              created_date: new Date(),
+              created_by: "Admin",
+              updated_date: new Date(),
+              updated_by: "Admin"
+            }
+            category.insertOne(categoryData, function (err, result) {
+              if (err) {
+                console.log(err);
+                reject('Can not insert data ' + err);
+              } else {
+                // console.log('Inserted : ', result.insertedId);
+                $scope.category_id = result.insertedId;
+                resolve("Insert Ok");
+              }
+              db.close();
+            });
+          }
+        });
+      });
+      // return deferred.promise;
+    }
+
+    insertCategory()
+    .then(function() {
+      // console.log("Data from promise = ", arguments);
+      callbackok($scope.category_id);
+    }).catch(function(e){
+  	  console.log(e);
       callbackerror(e);
   	});
   }

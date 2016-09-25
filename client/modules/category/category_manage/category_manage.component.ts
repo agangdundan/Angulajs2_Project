@@ -7,16 +7,14 @@ declare var $ : any;
 
 @Component({
     selector: "catagory_edit",
-    // templateUrl: "client/modules/category/category_list/category_list.html",
-    template : `<div> Hello </div>` 
+    templateUrl: "client/modules/category/category_manage/category_manage.html"
 })
 export class CategoryManageComponent {
-    item = 1;
-    error:string = "";
-    query:string = "";
-    categoryList = [];
-    categorys = [];
+    private error:string = "";
     private cateId:any;
+    private cateName:string = "";
+    private cateDescription:string = "";
+    private selectedStatus:any = "Y";
 
     constructor(
         private router: Router,
@@ -35,11 +33,43 @@ export class CategoryManageComponent {
       console.log(this.cateId);
     }
 
-    getCategoryList(){
-      
+    changeStatus(newValue) {
+        console.log(newValue);
+        this.selectedStatus = newValue;
     }
 
-    clickme(md){
-        
+    saveCategory(){
+        let param = {
+            cate_id: this.cateId,
+            cate_name: this.cateName,
+            cate_description: this.cateDescription,
+            cate_status: this.selectedStatus
+        };
+
+        this.apiService
+            .post("/category/savecategory", param)
+            .subscribe(
+                (res) => {
+                    console.log(" res = ", res);
+                    if(res.status === true){
+                        alert("บันทึกข้อมูลสำเร็จ");
+                        this.reset();
+                    } else {
+                        console.log("can't save");
+                    }
+                },
+                (error) => {
+                    this.error = error.message;
+                    console.log("error = ", this.error);
+                    setTimeout(() => this.error = null, 4000);
+                }
+            )
+    }
+
+    reset(){
+        this.cateId = "create";
+        this.cateName = "";
+        this.cateDescription = "";
+        this.selectedStatus = "Y";
     }
 }

@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-sm-12">จัดการกลุ่มสินค้า</div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm-4 form-group">
+        <label for="categoryName">Category Name:</label>
+        <input type="text" class="form-control" id="categoryName" [(ngModel)]="cateName" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4 form-group">
+        <label for="categoryDesciption">Category Description:</label>
+        <textarea type="text" class="form-control" id="categoryDesciption" [(ngModel)]="cateDescription"></textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3 form-group">
+        <label for="categoryStatus">Category Description:</label>
+        <select class="form-control" id="categoryStatus" [(ngModel)]="selectedStatus" (ngModelChange)="changeStatus($event)">
+            <option value="Y">Active</option>
+            <option value="N">Unactive</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <button class="btn btn-primary" id="sentCatecory" (click)="saveCategory()">Save</button>
+    </div>
+</div>

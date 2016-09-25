@@ -4,7 +4,6 @@ import { ApiService } from "../../../service/api.service";
 import { MenuService } from "../../../service/menu.service";
 import { pmslnService } from "../../../service/pmsln.service";
 import { FilterTable } from "../../../service/table.filter.service";
-import { FilterArrayPipe } from '../../../pipes/filterTable';
 declare var $ : any;
 
 @Component({
@@ -12,12 +11,12 @@ declare var $ : any;
     templateUrl: "client/modules/category/category_list/category_list.html",
 })
 export class CategoryListComponent {
-    item = 1;
-    error:string = "";
-    query:string = "";
-    categoryList = [];
-    categorys = [];
-    cols = ["cate_name","cate_description","product_qty","status"];
+    private item = 1;
+    private error:string = "";
+    private query:string = "";
+    private categoryList = [];
+    private categorys = [];
+    private cols = ["cate_name","cate_description","product_qty","status"];
 
     private filterTable:any;
 
@@ -54,10 +53,13 @@ export class CategoryListComponent {
 
     add_new_category(){
       console.log("add new cate = ", this.query);
-    //   this.categorys = [];
-    //   this.categorys = this.filterTable.filter(this.cols,this.categoryList,this.query,1,10);
-        let link = ['/category_list/create_cate', "9"];
+        let link = ['/category_list/create_cate', "create"];
         this.router.navigate(link);
+    }
+
+    filterCategory(){
+          this.categorys = [];
+          this.categorys = this.filterTable.filter(this.cols,this.categoryList,this.query,1,10);
     }
 
     clickme(md){

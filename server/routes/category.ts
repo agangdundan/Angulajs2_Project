@@ -23,4 +23,23 @@ categoryRouter.post("/category_list", function(req, res, next) {
     // });
 });
 
+categoryRouter.post("/savecategory", function(req, res, next){
+    // console.log("cate data = ", req.body);
+    var data = req.body;
+    if(data.cate_id == "create"){
+        category.saveCategory(data, function(id){
+            res.json({
+                status:true,
+                id:id
+            });
+        }, function(errorMessage){
+            console.log("error m : ", errorMessage);
+            res.json({
+                status:false,
+                error:errorMessage
+            });
+        });
+    }
+});
+
 export { categoryRouter }

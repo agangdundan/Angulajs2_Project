@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { ApiService } from "../../service/api.service";
 import { MenuService } from "../../service/menu.service";
 import { pmslnService } from "../../service/pmsln.service";
+import { FilterTable } from "../../service/table.filter.service";
 
 @NgModule({
     imports:      [ CommonModule ],
@@ -18,7 +19,8 @@ export class SharedModule {
             providers: [
                 ApiService,
                 MenuService,
-                pmslnService
+                pmslnService,
+                FilterTable
             ]
         };
     }

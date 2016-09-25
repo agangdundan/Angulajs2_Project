@@ -9,9 +9,9 @@ import { AppComponent }  from './app.component';
 import { routing } from "./routes";
 import { MenuComponent } from "./components/shared/menu.component";
 import { LoginModule } from "./modules/login/login.module";
-import { CategoryModule } from "./modules/category/category.module";
 import { ContactModule } from "./modules/contact/contact.module";
 import { HomeModule } from "./modules/home/home.module";
+import { CategoryModule } from "./modules/category/category.module";
 import { SharedModule } from "./modules/shared/shared.module";
 
 @NgModule({
@@ -21,9 +21,9 @@ import { SharedModule } from "./modules/shared/shared.module";
         HttpModule,
         // NgSemanticModule,
         LoginModule,
-        CategoryModule,
         ContactModule,
         HomeModule,
+        CategoryModule,
         routing,
         SharedModule.forRoot()
     ],

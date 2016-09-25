@@ -33,7 +33,7 @@ module.exports = new function() {
 ///////////// islogin tokem method  ////////////////////////////////////////////
   this.isLogin = function(req){
     let token = this.readToken(req);
-    console.log("isLogin token is : ", token);
+    // console.log("isLogin token is : ", token);
     if(token.id != 0){
       return true;
     }else {
