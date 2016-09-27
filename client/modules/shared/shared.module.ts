@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { ApiService } from "../../service/api.service";
 import { MenuService } from "../../service/menu.service";
+import { LoginService } from "../../service/login.service";
 import { pmslnService } from "../../service/pmsln.service";
 import { FilterTable } from "../../service/table.filter.service";
 
@@ -19,6 +20,7 @@ export class SharedModule {
             providers: [
                 ApiService,
                 MenuService,
+                LoginService,
                 pmslnService,
                 FilterTable
             ]

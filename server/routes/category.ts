@@ -42,4 +42,21 @@ categoryRouter.post("/savecategory", function(req, res, next){
     }
 });
 
+categoryRouter.post("/getcategorybyid", function(req, res, next){
+    var data = req.body;
+    // console.log("data get cet by id = ", data);
+    category.getCategoryById(data.cate_id, function(cate){
+        res.json({
+            data:cate,
+            status:true
+        })
+    }, function(errorMessage){
+        console.log("errorMessage = ", errorMessage);
+        res.json({
+            status:false,
+            error:errorMessage
+        });
+    });
+});
+
 export { categoryRouter }

@@ -28,9 +28,12 @@ export class CategoryManageComponent {
     }
 
     ngOnInit(){
-      console.log(this.route.params);
+    //   console.log(this.route.params);
       this.cateId = this.route.snapshot.params['id'];
       console.log(this.cateId);
+      if(this.cateId != "create"){
+          this.getCategoryByid(this.cateId);
+      }
     }
 
     changeStatus(newValue) {
@@ -50,7 +53,7 @@ export class CategoryManageComponent {
             .post("/category/savecategory", param)
             .subscribe(
                 (res) => {
-                    console.log(" res = ", res);
+                    // console.log(" res = ", res);
                     if(res.status === true){
                         alert("บันทึกข้อมูลสำเร็จ");
                         this.reset();
@@ -71,5 +74,33 @@ export class CategoryManageComponent {
         this.cateName = "";
         this.cateDescription = "";
         this.selectedStatus = "Y";
+    }
+
+    getCategoryByid(id){
+        let param = {
+            cate_id: id
+        };
+        this.apiService
+            .post("/category/getcategorybyid", param)
+            .subscribe(
+                (res) => {
+                    // console.log(" res = ", res);
+                    if(res.status === true){
+                        console.log(res);
+                        let cateResData = res.data[0];
+                        this.cateId = cateResData.id;
+                        this.cateName = cateResData.cate_name;
+                        this.cateDescription = cateResData.cate_description;
+                        this.selectedStatus = cateResData.status;
+                    } else {
+                        console.log("No data");
+                    }
+                },
+                (error) => {
+                    this.error = error.message;
+                    console.log("error = ", this.error);
+                    setTimeout(() => this.error = null, 4000);
+                }
+            )
     }
 }

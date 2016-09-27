@@ -45,4 +45,10 @@ export class MenuComponent {
         // }
     }
 
+    logOut(){
+      // console.log("Do log out");
+      window.location.href = "#/login";
+      location.reload();
+    }
+
 }

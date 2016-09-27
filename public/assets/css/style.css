@@ -116,3 +116,17 @@ body {
     width: 1090px;
     padding-left: 10px;
 }
+
+.btNone {
+  width: 100%;
+  background: none;
+  border: none;
+  /*padding-left: 21px;*/
+}
+
+.btNoneLogout {
+  /*width: 100%;*/
+  background: none;
+  border: none;
+  padding-left: 21px;
+}

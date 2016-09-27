@@ -40,7 +40,7 @@ export class CategoryListComponent {
           .post("category/category_list",param)
           .subscribe(
               (data) => {
-                  console.log("from category = ",data);
+                //   console.log("from category = ",data);
                   this.categoryList = data.data;
                   this.categorys = this.filterTable.filter(this.cols,this.categoryList,this.query,1,10);
               },
@@ -51,9 +51,9 @@ export class CategoryListComponent {
               });
     }
 
-    add_new_category(){
+    add_new_category(id){
       console.log("add new cate = ", this.query);
-        let link = ['/category_list/create_cate', "create"];
+        let link = ['/category_list/create_cate', id];
         this.router.navigate(link);
     }
 

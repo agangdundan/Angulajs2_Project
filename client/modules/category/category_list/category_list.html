@@ -5,7 +5,7 @@
   <br/>
   <div class="row">
     <div class="col-sm-2">
-      <button type="button" class="btn btn-primary" (click)="add_new_category()">เพิ่มกลุ่มสินค้าใหม่</button>
+      <button type="button" class="btn btn-primary" (click)="add_new_category('create')">เพิ่มกลุ่มสินค้าใหม่</button>
     </div>
   </div>
 
@@ -23,11 +23,11 @@
       <table id="example" class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th class="a" id="me" (click)="clickme('me')">Category name</th>
+            <th class="a">Category name</th>
             <th class="a">Description</th>
             <th class="a">Product qty</th>
             <!--<th class="a">Cover img</th>-->
-            <th class="a">Status</th>
+            <th class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
             <td>{{cate.cate_description}}</td>
             <td>{{cate.product_qty}}</td>
             <!--<td><img src="img/p83.jpg" alt="Smiley face" height="42" width="42"></td>-->
-            <td>{{cate.status}}</td>
+            <td class="text-center"><button class="btNone" (click)="add_new_category(cate.id)"><i class="fa fa-edit"></i></button></td>
           </tr>
         </tbody>
       </table>

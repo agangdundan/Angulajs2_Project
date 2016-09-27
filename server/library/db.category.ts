@@ -5,6 +5,7 @@ var url = 'mongodb://localhost:27017/mini_eq';
 
 module.exports = new function() {
 
+//////////////////////////////////////////////  get all category  ///////////////////////////////////////////
   this.getCategoryList = function(callbackok,callbackerror){
     let $scope:any = {};
     $scope.getCategoryList = [];
@@ -18,7 +19,7 @@ module.exports = new function() {
             reject('Unable to connect to the mongoDB server. Error:' + err);
           }
   				assert.equal(null, err);
-  				let cursor = db.collection('category').find();
+  				let cursor = db.collection('category').find({"status":"Y"});
   				cursor.each(function(err, doc) {
             if(err){
               // deferred.reject(err);
@@ -53,9 +54,44 @@ module.exports = new function() {
   	});
   }
 
+
+/////////////////////////////////////////  Save Category ////////////////////////////////////////////////////
   this.saveCategory = function(data, callbackok, callbackerror){
-    // console.log(" save data = ", data);
     let $scope:any = {};
+    $scope.getListCategory = [];
+
+    let getLastid = function(){
+      return new Promise(function(resolve, reject) {
+        MongoClient.connect(url, function(err, db) {
+          if(err){
+            reject("Can't connect to data base " + err);
+          } else {
+            let category = db.collection('category');
+            let cursor = category.find({});
+
+            cursor.sort({id: -1});
+            cursor.each(function(err, result) {
+              if(err){
+                // console.log("err = ",  err);
+                reject(err);
+              } else if (result != null) {
+                  $scope.getListCategory.push(result);
+              } else{
+                // Check length list.
+                if($scope.getListCategory.length > 0){
+                  $scope.lastId = $scope.getListCategory[0].id;
+                  // console.log("last id = ", $scope.lastId);
+                  resolve("That Ok");
+                } else {
+                  reject("On data Last ID !!!");
+                }
+                db.close();
+              }
+            });
+          }
+        });
+      });
+    }
 
     let insertCategory = function(){
       return new Promise(function(resolve, reject) {
@@ -75,7 +111,8 @@ module.exports = new function() {
               created_date: new Date(),
               created_by: "Admin",
               updated_date: new Date(),
-              updated_by: "Admin"
+              updated_by: "Admin",
+              id: $scope.lastId + 1
             }
             category.insertOne(categoryData, function (err, result) {
               if (err) {
@@ -94,12 +131,60 @@ module.exports = new function() {
       // return deferred.promise;
     }
 
-    insertCategory()
+
+    getLastid()
+    .then(insertCategory)
     .then(function() {
       // console.log("Data from promise = ", arguments);
       callbackok($scope.category_id);
     }).catch(function(e){
   	  console.log(e);
+      callbackerror(e);
+  	});
+  }
+
+//////////////////////////////////////////////// get 1 category /////////////////////////////////////////////
+
+  this.getCategoryById = function(id, callbackok, callbackerror){
+    let $scope:any = {};
+    $scope.getCategoryById = [];
+
+    let getAllCate = function(){
+      // let deferred = promise.pending();
+      return new Promise(function(resolve, reject) {
+        MongoClient.connect(url, function(err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            reject('Unable to connect to the mongoDB server. Error:' + err);
+          }
+  				assert.equal(null, err);
+          // console.log(id);
+  				let cursor = db.collection('category').find({"id": parseInt(id)});
+  				cursor.each(function(err, doc) {
+            if(err){
+              reject(err);
+            }
+  					assert.equal(err, null);
+  					if (doc != null) {
+  						$scope.getCategoryById.push(doc);
+  					} else{
+  						if($scope.getCategoryById.length > 0){
+                resolve("have data.");
+  						} else {
+                resolve("Don't have data.");
+  						}
+  					}
+  				});
+  			});
+      });
+    }
+
+    getAllCate()
+    .then(function() {
+      // console.log("getCate from promise = ", arguments);
+      callbackok($scope.getCategoryById);
+    }).catch(function(e){
+  	  console.log("reject is = ", e);
       callbackerror(e);
   	});
   }

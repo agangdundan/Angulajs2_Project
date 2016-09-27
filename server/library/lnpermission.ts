@@ -1,5 +1,5 @@
-let promise = require('bluebird');
-let jwt =  require('jwt-simple');
+var promise = require('bluebird');
+var jwt =  require('jwt-simple');
 
 module.exports = new function() {
   this.secret     = "p@ssw0rd";

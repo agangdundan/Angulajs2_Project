@@ -78,7 +78,7 @@ loginRouter.get('/login', function(req, res, next){
 });
 
 loginRouter.post("/login", function(req,res,next){
-    console.log("Post login data = ", req.body);
+    // console.log("Post login data = ", req.body);
     let user = req.body.user;
     let password  = req.body.password;
 
