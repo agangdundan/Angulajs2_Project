@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { MenuService } from "../../service/menu.service";
-import {Subscription} from 'rxjs/Subscription';
+import { LoginService } from "../../service/login.service";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: "menu",
@@ -15,17 +16,16 @@ export class MenuComponent {
 
     subscription:Subscription;
 
-    constructor(private _navService:MenuService){
+    constructor(private _navService:MenuService, private lgs:LoginService){
       this.storage = localStorage;
+      this.lgs.showNav$.subscribe(data => this.setUserData(data));
+      this._navService.navItem$.subscribe(data => this.gensomething(data));
     }
 
     ngOnInit() {
       //this.subscription = this._navService.navItem$.subscribe(test => this.test1 = test );
-      this._navService.navItem$.subscribe(data => this.gensomething(data));
-
       if(this.storage.getItem('logindata')){
         let logindata = JSON.parse(this.storage.getItem('logindata'));
-        // console.log("logindata = ", logindata);
         this.display_name = logindata.display_name;
       }
     }
@@ -45,10 +45,18 @@ export class MenuComponent {
         // }
     }
 
+    setUserData(obj){
+      // console.log("do ever");
+      if(this.storage.getItem('logindata')){
+        let logindata = JSON.parse(this.storage.getItem('logindata'));
+        this.display_name = logindata.display_name;
+      }
+    }
+
     logOut(){
       // console.log("Do log out");
       window.location.href = "#/login";
-      location.reload();
+      // location.reload();
     }
 
 }

@@ -22,7 +22,7 @@ export class CategoryListComponent {
 
     constructor( private router: Router,
         private apiService: ApiService ,
-        private _navService: MenuService, 
+        private _navService: MenuService,
         private permission: pmslnService,
         private _elRef: ElementRef) {
             this.filterTable = new FilterTable();
@@ -31,6 +31,7 @@ export class CategoryListComponent {
     }
 
     ngOnInit(){
+      // console.log("do Init");
       this.getCategoryList();
     }
 

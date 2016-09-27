@@ -1,5 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { LoginService } from "./service/login.service";
 // import { SemanticPopupComponent } from "ng-semantic";
 import "rxjs/add/operator/map";
 
@@ -20,8 +21,9 @@ export class AppComponent {
     isLogged: boolean;
     // @ViewChild("myPopup") myPopup: SemanticPopupComponent;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private lgs: LoginService) {
         this.isLogged = !!localStorage.getItem("id_token");
+        this.lgs.showNav$.subscribe(data => this.showNav(data));
     }
 
     logout(): void {
@@ -42,11 +44,20 @@ export class AppComponent {
                         this.hiddenLogin = false;
                         this.loginPading = "225px";
                     }else{
+                        this.hiddenLogin = true;
                         this.loginPading = "0px";
                         window.location.href = "#/login";
                     }
                 },
                 (error: Error) => { console.log(error); }
             );
+    }
+
+    showNav(obj){
+      if(obj != "" && obj != undefined){
+        let show = JSON.parse(obj);
+        this.hiddenLogin = show.isShow.hiddenLogin;
+        this.loginPading = show.isShow.loginPading;
+      }
     }
 }
