@@ -12,6 +12,7 @@ export class MenuComponent {
     private storage: any;
     test: any;
     test1: any;
+    private staffData:any;
     display_name: any;
 
     subscription:Subscription;
@@ -26,7 +27,9 @@ export class MenuComponent {
       //this.subscription = this._navService.navItem$.subscribe(test => this.test1 = test );
       if(this.storage.getItem('logindata')){
         let logindata = JSON.parse(this.storage.getItem('logindata'));
+        this.staffData = logindata;
         this.display_name = logindata.display_name;
+        console.log("staff = ", this.staffData);
       }
     }
 
@@ -49,7 +52,9 @@ export class MenuComponent {
       // console.log("do ever");
       if(this.storage.getItem('logindata')){
         let logindata = JSON.parse(this.storage.getItem('logindata'));
+        this.staffData = logindata;
         this.display_name = logindata.display_name;
+        console.log("staff = ", this.staffData);
       }
     }
 
