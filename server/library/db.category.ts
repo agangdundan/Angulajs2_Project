@@ -1,5 +1,6 @@
 Promise     = require('bluebird');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
 var assert = require('assert');
 var url = 'mongodb://localhost:27017/mini_eq';
 
@@ -159,7 +160,8 @@ module.exports = new function() {
           }
   				assert.equal(null, err);
           // console.log(id);
-  				let cursor = db.collection('category').find({"id": parseInt(id)});
+  				// let cursor = db.collection('category').find({"id": parseInt(id)});
+          let cursor = db.collection('category').find({"_id": ObjectId(id)});
   				cursor.each(function(err, doc) {
             if(err){
               reject(err);
