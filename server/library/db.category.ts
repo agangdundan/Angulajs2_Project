@@ -61,39 +61,6 @@ module.exports = new function() {
     let $scope:any = {};
     $scope.getListCategory = [];
 
-    let getLastid = function(){
-      return new Promise(function(resolve, reject) {
-        MongoClient.connect(url, function(err, db) {
-          if(err){
-            reject("Can't connect to data base " + err);
-          } else {
-            let category = db.collection('category');
-            let cursor = category.find({});
-
-            cursor.sort({id: -1});
-            cursor.each(function(err, result) {
-              if(err){
-                // console.log("err = ",  err);
-                reject(err);
-              } else if (result != null) {
-                  $scope.getListCategory.push(result);
-              } else{
-                // Check length list.
-                if($scope.getListCategory.length > 0){
-                  $scope.lastId = $scope.getListCategory[0].id;
-                  // console.log("last id = ", $scope.lastId);
-                  resolve("That Ok");
-                } else {
-                  reject("On data Last ID !!!");
-                }
-                db.close();
-              }
-            });
-          }
-        });
-      });
-    }
-
     let insertCategory = function(){
       return new Promise(function(resolve, reject) {
         MongoClient.connect(url, function (err, db) {
@@ -112,8 +79,7 @@ module.exports = new function() {
               created_date: new Date(),
               created_by: "Admin",
               updated_date: new Date(),
-              updated_by: "Admin",
-              id: $scope.lastId + 1
+              updated_by: "Admin"
             }
             category.insertOne(categoryData, function (err, result) {
               if (err) {
@@ -133,8 +99,7 @@ module.exports = new function() {
     }
 
 
-    getLastid()
-    .then(insertCategory)
+    insertCategory()
     .then(function() {
       // console.log("Data from promise = ", arguments);
       callbackok($scope.category_id);
@@ -143,6 +108,56 @@ module.exports = new function() {
       callbackerror(e);
   	});
   }
+
+//////////////////////////////////////////////// Edit Category //////////////////////////////////////////////
+this.editCategory = function(data, callbackok, callbackerror){
+  let $scope:any = {};
+
+  let updateCategory = function(){
+    return new Promise(function(resolve, reject){
+      MongoClient.connect(url, function (err, db){
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            reject('Unable to connect to the mongoDB server. Error:' + err);
+        }else{
+            let category = db.collection('category');
+            let categoryData = {
+              cate_name: data.cate_name,
+              cate_description: data.cate_description,
+              status: data.cate_status,
+              product_qty: 0,
+              cover_img: "",
+              created_date: new Date(),
+              created_by: "Admin",
+              updated_date: new Date(),
+              updated_by: "Admin"
+            }
+            category.updateOne({"_id":ObjectId(data.cate_id)}, categoryData, 
+            function(err, result){
+              // console.log("Update = ", err, " = ", result, " data = ", categoryData);
+              if (err) {
+                console.log(err);
+                reject('Can not update data ' + err);
+              } else {
+                // console.log('Inserted : ', result.insertedId);
+                resolve("update Ok");
+              }
+              db.close();
+            });
+        }
+      });
+    });
+  }
+
+  updateCategory()
+  .then(function() {
+    // console.log("Data from promise = ", arguments);
+    callbackok("updated" + data.cate_id);
+  }).catch(function(e){
+    console.log(e);
+    callbackerror(e);
+  });
+}
 
 //////////////////////////////////////////////// get 1 category /////////////////////////////////////////////
 

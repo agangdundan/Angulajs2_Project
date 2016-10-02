@@ -88,7 +88,7 @@ export class CategoryManageComponent {
                     if(res.status === true){
                         console.log(res);
                         let cateResData = res.data[0];
-                        this.cateId = cateResData.id;
+                        this.cateId = cateResData._id;
                         this.cateName = cateResData.cate_name;
                         this.cateDescription = cateResData.cate_description;
                         this.selectedStatus = cateResData.status;

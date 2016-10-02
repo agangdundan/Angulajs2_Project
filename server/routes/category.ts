@@ -39,6 +39,19 @@ categoryRouter.post("/savecategory", function(req, res, next){
                 error:errorMessage
             });
         });
+    } else {
+        category.editCategory(data, function(result){
+            res.json({
+                status:true,
+                id:result
+            });
+        }, function(errorMessage){
+            console.log("error m : ", errorMessage);
+            res.json({
+                status:false,
+                error:errorMessage
+            });
+        });
     }
 });
 
