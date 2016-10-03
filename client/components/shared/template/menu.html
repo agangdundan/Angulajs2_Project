@@ -96,7 +96,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{display_name}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    <a routerLink="setting"><i class="fa fa-fw fa-gear"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -109,12 +109,12 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebar_controller">
         <ul class="nav navbar-nav side-nav">
             <li>
-                <a class="menu" id="dashboard" routerLink="category_list">
+                <a class="menu" id="category" routerLink="category_list" (click)="menuClick('category')">
                   <i class="fa fa-fw fa-folder-open"></i> Category
                 </a>
             </li>
             <li>
-                <a class="menu" id="charts" href="#">
+                <a class="menu" id="charts" href="#" (click)="menuClick('charts')">
                   <i class="fa fa-fw fa-bar-chart-o"></i> Charts
                 </a>
             </li>

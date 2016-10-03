@@ -17,7 +17,7 @@ import { FormComponent } from "./form/form.component";
         routing,
         SharedModule.forRoot()
     ],
-    // exports: [ ProfileComponent],
+    // exports: [ ProfileComponent], //จริงๆไม่ต้องมีก็ได้นะ
     declarations: [ ContactComponent, FormComponent /*,ProfileComponent */ ],
     bootstrap:    [ ContactComponent ]
 })

@@ -25,13 +25,14 @@ export class CategoryListComponent {
         private _navService: MenuService,
         private permission: pmslnService,
         private _elRef: ElementRef) {
-            this.filterTable = new FilterTable();
-            this.permission.isLogin();
-            console.log("category_list.component");
+            
     }
 
     ngOnInit(){
       // console.log("do Init");
+      console.log("category_list.component");
+      this.filterTable = new FilterTable();
+      this.permission.isLogin();
       this.getCategoryList();
     }
 

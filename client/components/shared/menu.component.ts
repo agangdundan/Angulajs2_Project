@@ -1,7 +1,8 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ElementRef } from "@angular/core";
 import { MenuService } from "../../service/menu.service";
 import { LoginService } from "../../service/login.service";
 import { Subscription } from 'rxjs/Subscription';
+declare var $ : any;
 
 @Component({
     selector: "menu",
@@ -10,27 +11,31 @@ import { Subscription } from 'rxjs/Subscription';
 export class MenuComponent {
     @Input() name: string;
     private storage: any;
-    test: any;
-    test1: any;
+    private test: any;
+    private test1: any;
     private staffData:any;
-    display_name: any;
+    private display_name: any;
+    private menuId: any[];
+    private dropDownMenu: any;
 
     subscription:Subscription;
 
-    constructor(private _navService:MenuService, private lgs:LoginService){
+    constructor(private _navService:MenuService, private lgs:LoginService, private _elRef: ElementRef){
       this.storage = localStorage;
-      this.lgs.showNav$.subscribe(data => this.setUserData(data));
-      this._navService.navItem$.subscribe(data => this.gensomething(data));
     }
 
     ngOnInit() {
-      //this.subscription = this._navService.navItem$.subscribe(test => this.test1 = test );
+      this.lgs.showNav$.subscribe(data => this.setUserData(data));
+      this._navService.navItem$.subscribe(data => this.gensomething(data));
+      
       if(this.storage.getItem('logindata')){
         let logindata = JSON.parse(this.storage.getItem('logindata'));
         this.staffData = logindata;
         this.display_name = logindata.display_name;
         console.log("staff = ", this.staffData);
       }
+      
+      this.menuId = $(this._elRef.nativeElement).find('.menu');
     }
 
     gensomething(od){
@@ -40,12 +45,6 @@ export class MenuComponent {
           console.log(JSON.parse(this.test1));
           this.test = JSON.parse(od).employees;
         }
-        // else{
-        //     console.log(od);
-        //     this.test1 = od;
-        //     console.log(JSON.parse(this.test1));
-        //     this.test = JSON.parse(od).employees;
-        // }
     }
 
     setUserData(obj){
@@ -62,6 +61,22 @@ export class MenuComponent {
       // console.log("Do log out");
       window.location.href = "#/login";
       // location.reload();
+    }
+
+    menuClick(idName){
+      for (let i=0; i < this.menuId.length; i++){
+        $(this._elRef.nativeElement).find('#'+this.menuId[i].id).css({'background':'','color':''});
+        if(this.menuId[i].id == idName){
+          $(this._elRef.nativeElement).find('#'+this.menuId[i].id).css({'background':'#000','color':'#fff'});
+        }
+      }
+
+      // for (let j=0; j < this.dropDownMenu.length; j++){
+      //   $('#' + this.dropDownMenu[j].id).css({'background':'','color':''});
+      //   if(this.dropDownMenu[j].id == idName){
+      //     $('#'+this.dropDownMenu[j].id).css({'background':'#000','color':'#fff'});
+      //   }
+      // }
     }
 
 }

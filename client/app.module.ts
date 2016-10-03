@@ -12,6 +12,7 @@ import { LoginModule } from "./modules/login/login.module";
 import { ContactModule } from "./modules/contact/contact.module";
 import { HomeModule } from "./modules/home/home.module";
 import { CategoryModule } from "./modules/category/category.module";
+import { SettingModule } from "./modules/setting/setting.module";
 import { SharedModule } from "./modules/shared/shared.module";
 
 @NgModule({
@@ -24,6 +25,7 @@ import { SharedModule } from "./modules/shared/shared.module";
         ContactModule,
         HomeModule,
         CategoryModule,
+        SettingModule,
         routing,
         SharedModule.forRoot()
     ],
