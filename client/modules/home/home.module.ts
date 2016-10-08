@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http";
-import { NgSemanticModule } from "ng-semantic";
+// import { NgSemanticModule } from "ng-semantic";
 import { CommonModule } from "@angular/common";
 
 import { HomeComponent } from "./home.component";
@@ -14,7 +14,7 @@ import { ContactModule } from "../contact/contact.module";
         HttpModule,
         routing,
         SharedModule.forRoot(),
-        NgSemanticModule,
+        // NgSemanticModule,
         ContactModule
     ],
     declarations: [

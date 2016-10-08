@@ -1,1 +1,19 @@
-<div>Hello staff</div>
+<div class="row">แก้ไขข้อมูลผู้ใช้งาน</div>
+<br/>
+<div class="row">
+  <div class="col-sm-4 form-group">
+      <label for="staffName">Staff Name:</label>
+      <input type="text" class="form-control" id="staffName" [(ngModel)]="staffName" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4 form-group">
+      <label for="staffUserName">User Name:</label>
+      <input type="text" class="form-control" id="staffUserName" [(ngModel)]="staffUserName" />
+  </div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <button class="btn btn-primary" id="sentCatecory" (click)="updateStaff()">Change</button>
+    </div>
+</div>

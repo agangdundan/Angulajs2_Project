@@ -1,8 +1,10 @@
 Promise     = require('bluebird');
 //let conn        = require('./config'); // conn จะกลายเป็นคลาสที่สร้าง instance object แล้ว แล้วก็เป็นชื่อว่า database
+var conn = require('./config');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
 var assert = require('assert');
-var url = 'mongodb://localhost:27017/mini_eq';
+var url = conn.database;
 
 module.exports = new function() {
 
@@ -21,7 +23,7 @@ module.exports = new function() {
             // deferred.reject('Unable to connect to the mongoDB server. Error:' + err);
             reject('Unable to connect to the mongoDB server. Error:' + err);
           }else {
-    				let clt_member = db.collection('member');
+    				let clt_member = db.collection('staff');
             let cursor = clt_member.find({"login_name":loginname, "password":password});
 
     				cursor.each(function(err, result) {
@@ -62,7 +64,7 @@ module.exports = new function() {
           } else {
             // console.log('Connection established to', url);
             // Get the documents collection
-            let clt_member = db.collection('member');
+            let clt_member = db.collection('staff');
             //Create some users
             let member = {
               "login_name": loginname,
@@ -112,7 +114,7 @@ module.exports = new function() {
       return new Promise(function(resolve, reject){
         MongoClient.connect(url, function(err, db) {
   				assert.equal(null, err);
-  				let cursor = db.collection('member').find({"login_name":login,"password":pass});
+  				let cursor = db.collection('staff').find({"login_name":login,"password":pass});
   				cursor.each(function(err, doc) {
             if(err){
               reject(err);
@@ -146,6 +148,79 @@ module.exports = new function() {
   	  console.log(e);
       callbackerror(e);
   	});
+  }
+
+//////////////////////////////  change username ////////////////////////////////
+  this.updateStaff = function(data, callbackok, callbackerror){
+    console.log("155: data is = ", data);
+    let $scope: any = {};
+    $scope.loginData = [];
+
+    let _updateStaff = function(){
+      return new Promise(function(resolve, reject){
+        MongoClient.connect(url, function (err, db){
+          if (err) {
+              console.log('Unable to connect to the mongoDB server. Error:', err);
+              reject('Unable to connect to the mongoDB server. Error:' + err);
+          }else{
+              let staff = db.collection('staff');
+              let staffData = {
+                login_name: data.user,
+                display_name: data.name,
+                password:data.password,
+                status:"A"
+              }
+              staff.updateOne({"_id":ObjectId(data.id)}, staffData,
+              function(err, result){
+                // console.log("Update = ", err, " = ", result, " data = ", categoryData);
+                if (err) {
+                  console.log(err);
+                  reject('Can not update data ' + err);
+                } else {
+                  // console.log('Inserted : ', result.insertedId);
+                  resolve("update Ok");
+                }
+                db.close();
+              });
+          }
+        });
+      });
+    }
+
+    let _getLastUpdate = function(){
+      return new Promise(function(resolve, reject){
+        MongoClient.connect(url, function(err, db) {
+          assert.equal(null, err);
+          let cursor = db.collection('staff').find({"_id": ObjectId(data.id)});
+          cursor.each(function(err, doc) {
+            if(err){
+              reject(err);
+            }
+            assert.equal(err, null);
+            if (doc != null) {
+              $scope.loginData.push(doc);
+            } else{
+              if($scope.loginData.length > 0){
+                resolve("Login Ok");
+              } else {
+                reject("Invalid login");
+              }
+            }
+          });
+        });
+      });
+    }
+
+    _updateStaff()
+    .then(_getLastUpdate)
+    .then(function() {
+      // console.log("getCate from promise = ", arguments);
+      callbackok($scope.loginData);
+    }).catch(function(e){
+      console.log("reject is = ", e);
+      callbackerror(e);
+    });
+
   }
 
 

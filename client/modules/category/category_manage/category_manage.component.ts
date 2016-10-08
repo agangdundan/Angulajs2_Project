@@ -1,5 +1,6 @@
 import { Component, Input, ElementRef } from "@angular/core";
 import { Router,ActivatedRoute } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ApiService } from "../../../service/api.service";
 import { MenuService } from "../../../service/menu.service";
 import { pmslnService } from "../../../service/pmsln.service";
@@ -22,7 +23,8 @@ export class CategoryManageComponent {
         private apiService: ApiService , 
         private permission: pmslnService,
         private _navService: MenuService,
-        private _elRef: ElementRef) {
+        private _elRef: ElementRef,
+        private toastr: ToastsManager) {
             this.permission.isLogin();
             console.log("category_list.component");
     }
@@ -55,7 +57,7 @@ export class CategoryManageComponent {
                 (res) => {
                     // console.log(" res = ", res);
                     if(res.status === true){
-                        alert("บันทึกข้อมูลสำเร็จ");
+                        this.toastr.success('บันทึกข้อมูลสำเร็จ', 'Success!');
                         this.reset();
                     } else {
                         console.log("can't save");
@@ -64,6 +66,7 @@ export class CategoryManageComponent {
                 (error) => {
                     this.error = error.message;
                     console.log("error = ", this.error);
+                    this.toastr.warning('บันทึกข้อมูลไม่สำเร็จ', 'Oops!');
                     setTimeout(() => this.error = null, 4000);
                 }
             )

@@ -29,10 +29,10 @@ export class CategoryListComponent {
     }
 
     ngOnInit(){
-      // console.log("do Init");
-      console.log("category_list.component");
-      this.filterTable = new FilterTable();
       this.permission.isLogin();
+      console.log("category_list.component");
+
+      this.filterTable = new FilterTable();
       this.getCategoryList();
     }
 

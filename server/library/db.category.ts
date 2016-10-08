@@ -1,8 +1,9 @@
 Promise     = require('bluebird');
+var conn = require('./config');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var assert = require('assert');
-var url = 'mongodb://localhost:27017/mini_eq';
+var url = conn.database;
 
 module.exports = new function() {
 
@@ -132,7 +133,7 @@ this.editCategory = function(data, callbackok, callbackerror){
               updated_date: new Date(),
               updated_by: "Admin"
             }
-            category.updateOne({"_id":ObjectId(data.cate_id)}, categoryData, 
+            category.updateOne({"_id":ObjectId(data.cate_id)}, categoryData,
             function(err, result){
               // console.log("Update = ", err, " = ", result, " data = ", categoryData);
               if (err) {

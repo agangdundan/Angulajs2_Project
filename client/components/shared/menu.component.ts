@@ -32,7 +32,7 @@ export class MenuComponent {
         let logindata = JSON.parse(this.storage.getItem('logindata'));
         this.staffData = logindata;
         this.display_name = logindata.display_name;
-        console.log("staff = ", this.staffData);
+        // console.log("staff = ", this.staffData);
       }
       
       this.menuId = $(this._elRef.nativeElement).find('.menu');
@@ -53,7 +53,7 @@ export class MenuComponent {
         let logindata = JSON.parse(this.storage.getItem('logindata'));
         this.staffData = logindata;
         this.display_name = logindata.display_name;
-        console.log("staff = ", this.staffData);
+        // console.log("staff = ", this.staffData);
       }
     }
 

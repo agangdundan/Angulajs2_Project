@@ -96,6 +96,29 @@ loginRouter.post("/login", function(req,res,next){
             error: errorMessage
         });
     });
-})
+});
+
+loginRouter.post("/updatestaff", function(req, res, next){
+  let reqdata = {
+    name: req.body.name,
+    user: req.body.user,
+    id: req.body.id,
+    password: req.body.password
+  }
+
+  logins.updateStaff(reqdata, function(logingData){
+    res.json({
+        data:logingData,
+        status:true
+    });
+  }, function(errorMessage){
+    console.log("errorMessage = ", errorMessage);
+    res.json({
+        status:false,
+        error: errorMessage
+    });
+  });
+
+});
 
 export { loginRouter }

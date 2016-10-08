@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAuth } from "angular2-jwt";
 import { HttpModule } from "@angular/http";
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 // import { NgSemanticModule } from "ng-semantic";
 
 import { AppComponent }  from './app.component';
@@ -20,6 +21,7 @@ import { SharedModule } from "./modules/shared/shared.module";
         BrowserModule,
         FormsModule,
         HttpModule,
+        ToastModule,
         // NgSemanticModule,
         LoginModule,
         ContactModule,
