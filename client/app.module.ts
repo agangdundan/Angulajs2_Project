@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideAuth } from "angular2-jwt";
+// import { provideAuth } from "angular2-jwt";
 import { HttpModule } from "@angular/http";
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 // import { NgSemanticModule } from "ng-semantic";
@@ -31,13 +31,13 @@ import { SharedModule } from "./modules/shared/shared.module";
         routing,
         SharedModule.forRoot()
     ],
-    providers: [
-        provideAuth({
-            globalHeaders: [{"Content-type": "application/json"}],
-            newJwtError: true,
-            noTokenScheme: true
-        })
-    ],
+    // providers: [
+    //     provideAuth({
+    //         globalHeaders: [{"Content-type": "application/json"}],
+    //         newJwtError: true,
+    //         noTokenScheme: true
+    //     })
+    // ],
     declarations: [ MenuComponent, AppComponent ],
     bootstrap:    [ AppComponent ],
     schemas: [
